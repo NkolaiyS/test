@@ -186,7 +186,7 @@
         .hero-title { font-size: clamp(34px, 5.5vw, 64px); line-height: 1.15; margin-bottom: 25px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
         .hero-title strong { font-weight: 700; color: var(--text-main); }
         .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; }
-
+        
         /* --- БЕНТО СЕТКА --- */
         .bento-section { padding: 60px 5% 100px; max-width: 1200px; margin: 0 auto; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -194,12 +194,12 @@
         
         .w-2 { grid-column: span 2; }
 
-        /* --- ИСПРАВЛЕНО: ДВУХКОМПОНЕНТНЫЙ БЛОК ЭКСПЕРТОВ (ЛИЦА ПОЛНОСТЬЮ ОТКРЫТЫ) --- */
+        /* --- БЛОК ЭКСПЕРТОВ (ИСПРАВЛЕНО: Кадрирование по осям для десктопа) --- */
         .expert-main-box {
             grid-column: span 2;
             display: flex;
             flex-direction: row;
-            padding: 0 !important; /* Убираем паддинги, чтобы разделить картинку и текст */
+            padding: 0 !important;
             background: var(--expert-bg-internal);
         }
         .expert-text-part {
@@ -215,7 +215,8 @@
             flex: 0.9;
             background-image: url('ercperty.jpg');
             background-size: cover;
-            background-position: center center;
+            /* ИСПРАВЛЕНО: Сдвигаем фокус на 15% сверху на ПК, чтобы лица не обрезались */
+            background-position: 50% 15%;
             min-height: 100%;
         }
 
@@ -268,7 +269,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: ТЕКСТ ПОД ФОТО) --- */
+        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: Фокусировка кадров) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -278,7 +279,7 @@
             .bento-grid { grid-template-columns: 1fr; }
             .w-2, .complex-box, .expert-main-box { grid-column: span 1; }
             
-            /* Мобильный Hero */
+            /* Мобильный Hero: жесткий центр */
             .hero { 
                 background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.45) 0%, rgba(6, 9, 19, 0.65) 100%), url('hero-mobile.jpg') !important;
                 background-position: center center !important;
@@ -288,16 +289,17 @@
                 background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.65) 0%, rgba(244, 244, 249, 0.85) 100%), url('hero-mobile.jpg') !important;
             }
 
-            /* ИСПРАВЛЕНО: Переворачиваем блок экспертов вертикально. Фото сверху, текст снизу */
+            /* Вертикальный адаптив экспертов */
             .expert-main-box {
                 flex-direction: column !important;
                 min-height: auto;
             }
             .expert-image-part {
                 width: 100%;
-                height: 320px; /* Фиксированная высота для идеального отображения лиц */
+                height: 360px; /* ИСПРАВЛЕНО: Увеличил высоту рамки */
                 background-image: url('ercperty-mobile.jpg') !important;
-                background-position: center center !important;
+                /* ИСПРАВЛЕНО: Сдвигаем фокус на 10% сверху, чтобы лица Сергея и Любови встали по центру */
+                background-position: center 10% !important;
                 flex: none;
             }
             .expert-text-part {
@@ -369,7 +371,7 @@
 <section class="bento-section" id="services">
     <div class="bento-grid">
         
-        <!-- Блок 1 (ИСПРАВЛЕНО): Экспертность мастеров с разделением на фото- и текстовую часть -->
+        <!-- Блок 1: Экспертность мастеров с разделением на фото- и текстовую часть -->
         <div class="glass bento-card expert-main-box">
             <div class="expert-text-part">
                 <span class="badge">Команда</span>
