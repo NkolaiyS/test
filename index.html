@@ -36,11 +36,12 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --noise-opacity: 0.02;
             
-            /* Градиенты для светлой темы */
+            /* Светлые градиенты с мягким разбелением */
             --hero-gradient: linear-gradient(135deg, rgba(244, 244, 249, 0.62) 0%, rgba(244, 244, 249, 0.78) 100%);
             --expert-gradient: linear-gradient(to right, #F4F4F9 35%, rgba(244, 244, 249, 0.2) 70%, transparent 100%);
             --complex-gradient: linear-gradient(to right, #F4F4F9 50%, rgba(244, 244, 249, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, rgba(244, 244, 249, 0.9) 100%);
+            --text-card-bg: rgba(244, 244, 249, 0.95);
         }
 
         [data-theme="dark"] {
@@ -55,11 +56,12 @@
             --nav-bg: rgba(6, 9, 19, 0.95);
             --noise-opacity: 0.05;
             
-            /* Градиенты для темной темы */
+            /* Темные градиенты с благородным затемнением */
             --hero-gradient: linear-gradient(135deg, rgba(6, 9, 19, 0.67) 0%, rgba(6, 9, 19, 0.82) 100%);
             --expert-gradient: linear-gradient(to right, #060913 40%, rgba(6, 9, 19, 0.7) 70%, rgba(6, 9, 19, 0.3) 100%);
             --complex-gradient: linear-gradient(to right, #060913 45%, rgba(6, 9, 19, 0.6) 75%, rgba(6, 9, 19, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.95) 100%);
+            --text-card-bg: rgba(6, 9, 19, 0.95);
         }
 
         /* --- GLOBAL RESET --- */
@@ -173,7 +175,7 @@
         .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
         .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
 
-        /* --- HERO SECTION (ИСПРАВЛЕНО: Премиальное десктопное наложение) --- */
+        /* --- HERO SECTION --- */
         .hero { 
             min-height: 90vh; display: flex; align-items: center; justify-content: center; 
             padding: 140px 5% 60px; text-align: center; position: relative;
@@ -192,14 +194,20 @@
         .bento-card { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; position: relative; overflow: hidden; }
         
         .w-2 { grid-column: span 2; }
+        
+        .bento-card h3 { font-size: 28px; line-height: 1.2; font-weight: 600; z-index: 2; }
+        .bento-card p { font-size: 15px; opacity: 0.8; font-weight: 300; line-height: 1.6; z-index: 2; }
+        .card-price { font-size: 32px; font-family: var(--font-serif); color: var(--accent-emerald); font-weight: 600; margin-top: auto; z-index: 2; }
+        
+        .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* --- БЛОКИ С ФОТО (ДЕСКТОП ВЕРНУЛ В ПОЛНЫЙ ИДЕАЛ) --- */
+        /* --- ДЕСКТОПНЫЕ ФОТО БЛОКИ (ПОЛНЫЙ ИДЕАЛ) --- */
         .expert-main-box {
             grid-column: span 2;
             background-image: var(--expert-gradient), url('ercperty.jpg');
             background-size: cover; background-position: right center;
         }
-        /* Внутренний контейнер для мобильного фото (скрыт на ПК по умолчанию) */
+        /* Внутренний контейнер мобильного фото (скрыт на десктопе) */
         .mobile-expert-img {
             display: none;
             width: 100%;
@@ -219,6 +227,7 @@
             background-size: cover; background-position: right center;
         }
 
+        /* ИСПРАВЛЕНО: Полностью восстановлен путь к файлу массажа спины */
         .back-massage-box {
             background-image: var(--back-gradient), url('massazh-spiny.jpg');
             background-size: cover; background-position: center center;
@@ -256,7 +265,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- ЧИСТАЯ МОБИЛЬНАЯ АДАПТИВНОСТЬ БЕЗ ИЗМЕНЕНИЯ СТРУКТУРЫ ДЕСКТОПА --- */
+        /* --- ИСПРАВЛЕНО: МОБИЛЬНАЯ АДАПТИВНОСТЬ БЕЗ ПОВРЕЖДЕНИЯ ДЕСКТОПА --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -276,24 +285,30 @@
                 background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.65) 0%, rgba(244, 244, 249, 0.85) 100%), url('hero-mobile.jpg') !important;
             }
 
-            /* ИСПРАВЛЕНО: Убираем фоновую картинку из карточки, включаем независимый мобильный тег сверху */
+            /* ИСПРАВЛЕНО: Полное отделение фото от текста. Лица Сергея и Любови видны на 100% */
             .expert-main-box {
                 background-image: none !important;
-                padding: 0 !important; /* Убираем падинги, чтобы картинка встала вплотную */
+                padding: 0 !important; 
                 display: flex !important;
                 flex-direction: column !important;
+                justify-content: flex-start !important;
             }
             
-            /* Проявляем блок с мобильным фото на самом верху карточки */
+            /* Включаем блок с мобильным фото строго НАД текстом */
             .mobile-expert-img {
                 display: block !important;
-                /* ИСПРАВЛЕНО: Сдвигаем фокус ровно на 35% (2/3 вниз), лица встают идеально по центру */
+                /* Сдвиг на 35% опускает вертикальный кадр ровно на 2/3, лица встают по центру */
                 background-position: center 35% !important;
             }
             
-            /* Опускаем мобильный контент карточки на чистую подложку */
+            /* ИСПРАВЛЕНО: Сброшен space-between, убран пустой отступ (дыра в верстке) */
             .expert-main-box .content-wrap {
-                padding: 30px 24px;
+                padding: 32px 24px !important;
+                background: var(--text-card-bg);
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                gap: 12px !important; /* Умеренный, аккуратный зазор между строками */
             }
 
             /* Мобильные наложения для остальных Bento блоков */
@@ -358,14 +373,14 @@
         <div class="glass bento-card w-2 expert-main-box">
             <div class="mobile-expert-img"></div>
             
-            <div class="content-wrap" style="display: flex; flex-direction: column; gap: 15px; z-index: 2;">
+            <div class="content-wrap">
                 <span class="badge">Команда</span>
                 <h3>15 лет медицинского стажа у ведущих мастеров</h3>
                 <p>Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем глубоко и вдумчиво.</p>
             </div>
         </div>
 
-        <div class="glass bento-card">
+        <div class="glass bento-card back-massage-box">
             <span class="badge">Хит продаж</span>
             <h3>Массаж спины</h3>
             <p>Глубокая механическая проработка мышц от крестца до основания черепа. Снимает спазмы и скованность после сидячей работы.</p>
