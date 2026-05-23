@@ -12,7 +12,7 @@
     
     <title>Massage77 | Профессиональный массаж в Сыктывкаре</title>
     <meta name="description" content="Массаж в Сыктывкаре на Коммунистической 77/2. Избавьтесь от болей в спине и зажимов у мастеров с 15-летним медицинским стажем. Запись 24/7.">
-    <meta name="keywords" content="массаж сыктывкар, massazh syktivkar, массаж спины сыктывкар, комплексный массаж лица, массаж коммунистическая">
+    <meta name="keywords" content="массаж сыктывкар, массаж спины сыктывкар, детский массаж, лимфодренажный массаж, массаж коммунистическая, массаж 77 сыктывкар">
     <meta name="robots" content="index, follow">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +59,7 @@
             font-family: var(--font-main); 
             line-height: 1.6;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            background-size: auto;
             transition: background-color 0.5s ease, color 0.5s ease;
             -webkit-font-smoothing: antialiased;
         }
@@ -160,15 +161,15 @@
         .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
         .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
 
-        /* --- HERO SECTION (ИСПРАВЛЕНО: Дорогое умеренное затемнение фонового изображения) --- */
+        /* --- HERO SECTION (ИСПРАВЛЕНО: Умеренное затемнение на 3% светлее, центровка по центру) --- */
         .hero { 
-            min-height: 85vh; display: flex; align-items: center; justify-content: center; 
+            min-height: 90vh; display: flex; align-items: center; justify-content: center; 
             padding: 140px 5% 60px; text-align: center; position: relative;
-            background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.68) 0%, rgba(6, 9, 19, 0.82) 100%), url('hero-foto-massagh.jpg');
-            background-size: cover; background-position: center;
+            background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.72) 0%, rgba(6, 9, 19, 0.87) 100%), url('hero-foto-massagh.jpg');
+            background-size: cover; background-position: center center;
         }
         [data-theme="light"] .hero {
-            background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.72) 0%, rgba(244, 244, 249, 0.88) 100%), url('hero-foto-massagh.jpg');
+            background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.77) 0%, rgba(244, 244, 249, 0.92) 100%), url('hero-foto-massagh.jpg');
         }
         .hero-content { max-width: 850px; position: relative; z-index: 2; }
         .hero-label { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 25px; display: block; font-weight: 700; }
@@ -176,7 +177,7 @@
         .hero-title strong { font-weight: 700; color: var(--text-main); }
         .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; }
         
-        /* --- БЕНТО СЕТКА (ШАХМАТНЫЙ ПОРЯДОК) --- */
+        /* --- БЕНТО СЕТКА --- */
         .bento-section { padding: 60px 5% 100px; max-width: 1200px; margin: 0 auto; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bento-card { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; position: relative; overflow: hidden; }
@@ -189,9 +190,9 @@
         
         .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* ИСПРАВЛЕНО: Стили и фоны под шахматный порядок и латинские названия */
+        /* ИСПРАВЛЕНО: Карточки с фото в шахматном порядке + жесткая привязка к центру на мобилках */
         
-        /* Блок 1: Главная Экспертность (Фон обложки ercperty.jpg) */
+        /* Блок 1 (Фото слева/справа): Эксперты на бэкграунде */
         .expert-main-box {
             grid-column: span 2;
             background-image: linear-gradient(to right, var(--bg-deep) 35%, rgba(6, 9, 19, 0.4) 100%), url('ercperty.jpg');
@@ -201,16 +202,16 @@
             background-image: linear-gradient(to right, var(--bg-deep) 40%, rgba(255, 255, 255, 0.1) 100%), url('ercperty.jpg');
         }
 
-        /* Блок 3: ШВЗ (Фон sheyno-vorotnikovaya.jpg) */
+        /* Блок 3 (Фото): ШВЗ */
         .shvz-box {
-            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.6) 0%, rgba(6, 9, 19, 0.95) 100%), url('sheyno-vorotnikovaya.jpg');
-            background-size: cover; background-position: center;
+            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.4) 0%, rgba(6, 9, 19, 0.95) 100%), url('sheyno-vorotnikovaya.jpg');
+            background-size: cover; background-position: center center;
         }
         [data-theme="light"] .shvz-box {
             background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%), url('sheyno-vorotnikovaya.jpg');
         }
 
-        /* Блок 5: Комплексный массаж лица (Фон massazh-litsa.jpg) */
+        /* Блок 5 (Фото): Комплексный массаж лица */
         .complex-box {
             grid-column: span 2;
             background-image: linear-gradient(to right, var(--bg-deep) 45%, rgba(6, 9, 19, 0.5) 100%), url('massazh-litsa.jpg');
@@ -220,7 +221,7 @@
             background-image: linear-gradient(to right, var(--bg-deep) 50%, rgba(244, 244, 249, 0.2) 100%), url('massazh-litsa.jpg');
         }
 
-        /* Интерактивный Квиз / ИИ блок */
+        /* Квиз-блок подбора процедур */
         .ai-box { background: linear-gradient(145deg, rgba(16, 185, 129, 0.03), transparent); display: flex; flex-direction: column; }
         .quiz-options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; z-index: 2; }
         .quiz-btn { 
@@ -230,7 +231,7 @@
         }
         .quiz-btn:hover { border-color: var(--accent-emerald); background: rgba(16, 185, 129, 0.05); transform: translateX(3px); }
 
-        /* Отзывы */
+        /* Отзывы со звездами и длинной стрелкой */
         .stars-row { display: flex; gap: 4px; margin-bottom: 15px; z-index: 2; }
         .stars-row svg { width: 18px; height: 18px; fill: #FBBF24; }
 
@@ -252,17 +253,25 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- АДАПТИВНОСТЬ --- */
+        /* --- ИСПРАВЛЕНО: АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ЖЕСТКОЕ ЦЕНТРИРОВАНИЕ ФОТО) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
         }
         @media (max-width: 768px) {
             .bento-grid { grid-template-columns: 1fr; }
-            .w-2, .complex-box, .expert-main-box { grid-column: span 1; background-position: center; }
+            .w-2, .complex-box, .expert-main-box { grid-column: span 1; }
+            
+            /* Фикс срезов: принудительно выставляем центр-центр для мобильных экранов */
+            .hero, .expert-main-box, .shvz-box, .complex-box { 
+                background-position: center center !important; 
+            }
+            .hero { min-height: 75vh; }
+            
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             header { padding: 15px 5% !important; }
             .brand-name { font-size: 18px; letter-spacing: 4px; }
+            .arrow-link-hor { justify-content: center; } /* Выравнивание по центру для пальца */
         }
     </style>
 </head>
@@ -332,7 +341,7 @@
             <div class="card-price" style="text-shadow: 0 1px 4px rgba(0,0,0,0.5);">900 ₽</div>
         </div>
 
-        <!-- Блок 4 (ИНТЕРАКТИВ): Универсальный подбор / ИИ-Запись -->
+        <!-- Блок 4 (ИНТЕРАКТИВ): Универсальный подбор -->
         <div class="glass bento-card w-2 ai-box" id="ai-booking">
             <span class="badge">Интерактив</span>
             <h3>Что вас сейчас беспокоит?</h3>
@@ -348,7 +357,7 @@
         <!-- Блок 5 (ФОТО): Комплексный массаж лица (Фоновое фото massazh-litsa.jpg) -->
         <div class="glass bento-card complex-box">
             <span class="badge">Косметология и релакс</span>
-            <h3 style="max-width: 500px; text-shadow: 0 2px 6px rgba(0,0,0,0.3);">Комплексный массаж лица</h3>
+            <h3 style="max-width: 500px; text-shadow: 0 2px 6px rgba(0,0,0,0.3);">Complex massazh litsa</h3>
             <p style="max-width: 450px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">Включает обязательную проработку шейно-воротниковой зоны для снятия статического напряжения мышц. Улучшает микроциркуляцию тканей, разгоняет лимфоток и избавляет от отеков. Кожа становится упругой, подтянутой, уходят синие круги под глазами, а нервная система получает полную «перезагрузку».</p>
             <div class="card-price" style="text-shadow: 0 1px 4px rgba(0,0,0,0.3);">2 300 ₽</div>
         </div>
