@@ -36,11 +36,11 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --noise-opacity: 0.02;
             
-            /* Градиенты для светлой темы (Разбеление) */
+            /* Градиенты и фоны для светлой темы */
             --hero-gradient: linear-gradient(135deg, rgba(244, 244, 249, 0.82) 0%, rgba(244, 244, 249, 0.93) 100%);
-            --expert-gradient: linear-gradient(to right, #F4F4F9 45%, rgba(244, 244, 249, 0.3) 100%);
             --complex-gradient: linear-gradient(to right, #F4F4F9 50%, rgba(244, 244, 249, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, rgba(244, 244, 249, 0.9) 100%);
+            --expert-bg-internal: rgba(0, 0, 0, 0.02);
         }
 
         [data-theme="dark"] {
@@ -55,11 +55,11 @@
             --nav-bg: rgba(6, 9, 19, 0.95);
             --noise-opacity: 0.05;
             
-            /* Градиенты для темной темы (Затемнение) */
+            /* Градиенты и фоны для темной темы */
             --hero-gradient: linear-gradient(135deg, rgba(6, 9, 19, 0.78) 0%, rgba(6, 9, 19, 0.92) 100%);
-            --expert-gradient: linear-gradient(to right, #060913 40%, rgba(6, 9, 19, 0.7) 70%, rgba(6, 9, 19, 0.3) 100%);
             --complex-gradient: linear-gradient(to right, #060913 45%, rgba(6, 9, 19, 0.6) 75%, rgba(6, 9, 19, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.95) 100%);
+            --expert-bg-internal: rgba(255, 255, 255, 0.01);
         }
 
         /* --- GLOBAL RESET --- */
@@ -173,7 +173,7 @@
         .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
         .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
 
-        /* --- HERO SECTION (ИСПРАВЛЕНО: Привязка к CSS-переменным для точной регулировки яркости) --- */
+        /* --- HERO SECTION --- */
         .hero { 
             min-height: 90vh; display: flex; align-items: center; justify-content: center; 
             padding: 140px 5% 60px; text-align: center; position: relative;
@@ -186,20 +186,6 @@
         .hero-title { font-size: clamp(34px, 5.5vw, 64px); line-height: 1.15; margin-bottom: 25px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
         .hero-title strong { font-weight: 700; color: var(--text-main); }
         .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; }
-        
-        .hero .btn {
-            background: var(--elem-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-color: var(--accent-emerald);
-            color: var(--text-main);
-            font-weight: 600;
-        }
-        .hero .btn:hover {
-            background: var(--accent-emerald);
-            box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
-            color: #fff;
-        }
 
         /* --- БЕНТО СЕТКА --- */
         .bento-section { padding: 60px 5% 100px; max-width: 1200px; margin: 0 auto; }
@@ -207,20 +193,33 @@
         .bento-card { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; position: relative; overflow: hidden; }
         
         .w-2 { grid-column: span 2; }
-        
-        .bento-card h3 { font-size: 28px; line-height: 1.2; font-weight: 600; z-index: 2; }
-        .bento-card p { font-size: 15px; opacity: 0.8; font-weight: 300; line-height: 1.6; z-index: 2; }
-        .card-price { font-size: 32px; font-family: var(--font-serif); color: var(--accent-emerald); font-weight: 600; margin-top: auto; z-index: 2; }
-        
-        .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* --- НАСТРОЙКА ДЕСКТОПНЫХ БЛОКОВ С ФОТО (ИСПРАВЛЕНО: Текст не заезжает на лица) --- */
+        /* --- ИСПРАВЛЕНО: ДВУХКОМПОНЕНТНЫЙ БЛОК ЭКСПЕРТОВ (ЛИЦА ПОЛНОСТЬЮ ОТКРЫТЫ) --- */
         .expert-main-box {
             grid-column: span 2;
-            background-image: var(--expert-gradient), url('ercperty.jpg');
-            background-size: cover; background-position: right center;
+            display: flex;
+            flex-direction: row;
+            padding: 0 !important; /* Убираем паддинги, чтобы разделить картинку и текст */
+            background: var(--expert-bg-internal);
+        }
+        .expert-text-part {
+            flex: 1.1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+            z-index: 2;
+        }
+        .expert-image-part {
+            flex: 0.9;
+            background-image: url('ercperty.jpg');
+            background-size: cover;
+            background-position: center center;
+            min-height: 100%;
         }
 
+        /* Остальные фото-блоки Bento */
         .shvz-box {
             background-image: var(--back-gradient), url('sheyno-vorotnikovaya.jpg');
             background-size: cover; background-position: center center;
@@ -269,7 +268,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: Двухстороннее виньетирование для экспертов) --- */
+        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: ТЕКСТ ПОД ФОТО) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -279,9 +278,9 @@
             .bento-grid { grid-template-columns: 1fr; }
             .w-2, .complex-box, .expert-main-box { grid-column: span 1; }
             
-            /* Мобильный Hero: сбалансированное адаптивное наложение */
+            /* Мобильный Hero */
             .hero { 
-                background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.55) 0%, rgba(6, 9, 19, 0.75) 100%), url('hero-mobile.jpg') !important;
+                background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.45) 0%, rgba(6, 9, 19, 0.65) 100%), url('hero-mobile.jpg') !important;
                 background-position: center center !important;
                 min-height: 80vh;
             }
@@ -289,21 +288,25 @@
                 background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.65) 0%, rgba(244, 244, 249, 0.85) 100%), url('hero-mobile.jpg') !important;
             }
 
-            /* ИСПРАВЛЕНО: Мягкое боковое виньетирование для мобильных мастеров, лица полностью открыты */
+            /* ИСПРАВЛЕНО: Переворачиваем блок экспертов вертикально. Фото сверху, текст снизу */
             .expert-main-box {
-                background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.7) 0%, rgba(6, 9, 19, 0.1) 40%, rgba(6, 9, 19, 0.1) 70%, rgba(6, 9, 19, 0.8) 100%),
-                                  linear-gradient(to right, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0) 30%, rgba(6, 9, 19, 0) 70%, rgba(6, 9, 19, 0.5) 100%), 
-                                  url('ercperty-mobile.jpg') !important;
-                background-position: center center !important;
-                min-height: 420px; 
+                flex-direction: column !important;
+                min-height: auto;
             }
-            [data-theme="light"] .expert-main-box {
-                background-image: linear-gradient(to bottom, rgba(244, 244, 249, 0.6) 0%, rgba(244, 244, 249, 0) 40%, rgba(244, 244, 249, 0) 70%, rgba(244, 244, 249, 0.7) 100%),
-                                  linear-gradient(to right, rgba(254,254,254,0.4) 0%, rgba(254,254,254,0) 30%, rgba(254,254,254,0) 70%, rgba(254,254,254,0.4) 100%), 
-                                  url('ercperty-mobile.jpg') !important;
+            .expert-image-part {
+                width: 100%;
+                height: 320px; /* Фиксированная высота для идеального отображения лиц */
+                background-image: url('ercperty-mobile.jpg') !important;
+                background-position: center center !important;
+                flex: none;
+            }
+            .expert-text-part {
+                width: 100%;
+                padding: 30px 24px;
+                flex: none;
             }
 
-            /* Мобильное наложение для карточки лица, чтобы сдвинуть фокус */
+            /* Мобильное наложение для карточки лица */
             .complex-box {
                 background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.6) 0%, rgba(6, 9, 19, 0.9) 100%), url('massazh-litsa.jpg') !important;
                 background-position: center center !important;
@@ -366,11 +369,14 @@
 <section class="bento-section" id="services">
     <div class="bento-grid">
         
-        <!-- Блок 1 (ФОТО): Экспертность мастеров (ercperty.jpg / ercperty-mobile.jpg) -->
+        <!-- Блок 1 (ИСПРАВЛЕНО): Экспертность мастеров с разделением на фото- и текстовую часть -->
         <div class="glass bento-card expert-main-box">
-            <span class="badge">Команда</span>
-            <h3 style="text-shadow: 0 2px 8px rgba(0,0,0,0.5);">15 лет медицинского стажа у ведущих мастеров</h3>
-            <p style="text-shadow: 0 1px 5px rgba(0,0,0,0.5); max-width: 550px;">Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем глубоко и вдумчиво.</p>
+            <div class="expert-text-part">
+                <span class="badge">Команда</span>
+                <h3>15 лет медицинского стажа у ведущих мастеров</h3>
+                <p>Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем глубоко и вдумчиво.</p>
+            </div>
+            <div class="expert-image-part"></div>
         </div>
 
         <!-- Блок 2 (ТЕКСТ): Массаж спины -->
@@ -392,7 +398,7 @@
         <!-- Блок 4 (ИНТЕРАКТИВ): Универсальный подбор -->
         <div class="glass bento-card w-2 ai-box" id="ai-booking">
             <span class="badge">Интерактив</span>
-            <h3>What vas seychas bespokoit?</h3>
+            <h3>Что вас сейчас беспокоит?</h3>
             <p>Выберите ваш главный симптом, и система мгновенно переведет вас на диалог с мастером для записи на нужную процедуру.</p>
             
             <div class="quiz-options">
