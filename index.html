@@ -187,6 +187,20 @@
         .hero-title strong { font-weight: 700; color: var(--text-main); }
         .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; }
         
+        .hero .btn {
+            background: var(--elem-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-color: var(--accent-emerald);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .hero .btn:hover {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
+            color: #fff;
+        }
+
         /* --- БЕНТО СЕТКА --- */
         .bento-section { padding: 60px 5% 100px; max-width: 1200px; margin: 0 auto; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -194,7 +208,7 @@
         
         .w-2 { grid-column: span 2; }
 
-        /* --- БЛОК ЭКСПЕРТОВ (ИСПРАВЛЕНО: Кадрирование по осям для десктопа) --- */
+        /* --- БЛОК ЭКСПЕРТОВ --- */
         .expert-main-box {
             grid-column: span 2;
             display: flex;
@@ -215,7 +229,6 @@
             flex: 0.9;
             background-image: url('ercperty.jpg');
             background-size: cover;
-            /* ИСПРАВЛЕНО: Сдвигаем фокус на 15% сверху на ПК, чтобы лица не обрезались */
             background-position: 50% 15%;
             min-height: 100%;
         }
@@ -269,7 +282,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: Фокусировка кадров) --- */
+        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: СДВИГ КАДРА ЕЩЕ НА 2/3 ВНИЗ) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -279,7 +292,7 @@
             .bento-grid { grid-template-columns: 1fr; }
             .w-2, .complex-box, .expert-main-box { grid-column: span 1; }
             
-            /* Мобильный Hero: жесткий центр */
+            /* Мобильный Hero */
             .hero { 
                 background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.45) 0%, rgba(6, 9, 19, 0.65) 100%), url('hero-mobile.jpg') !important;
                 background-position: center center !important;
@@ -296,10 +309,10 @@
             }
             .expert-image-part {
                 width: 100%;
-                height: 360px; /* ИСПРАВЛЕНО: Увеличил высоту рамки */
+                height: 360px; 
                 background-image: url('ercperty-mobile.jpg') !important;
-                /* ИСПРАВЛЕНО: Сдвигаем фокус на 10% сверху, чтобы лица Сергея и Любови встали по центру */
-                background-position: center 10% !important;
+                /* ИСПРАВЛЕНО: Сдвинул фокус с 10% на 35% по вертикали, чтобы открыть лица и подбородки */
+                background-position: center 35% !important;
                 flex: none;
             }
             .expert-text-part {
@@ -371,7 +384,7 @@
 <section class="bento-section" id="services">
     <div class="bento-grid">
         
-        <!-- Блок 1: Экспертность мастеров с разделением на фото- и текстовую часть -->
+        <!-- Блок 1: Экспертность мастеров -->
         <div class="glass bento-card expert-main-box">
             <div class="expert-text-part">
                 <span class="badge">Команда</span>
@@ -460,7 +473,7 @@
         </div>
         <div class="footer-col">
             <h4>Реквизиты</h4>
-            <p>ИП Мартюшев Сергей Олегович</p>
+            <p>IP Martyshev Sergey Olegovich</p>
             <p>ИНН: 110112345678</p>
             <p>ОГРНИП: 321110100012345</p>
         </div>
