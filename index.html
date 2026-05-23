@@ -36,12 +36,11 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --noise-opacity: 0.02;
             
-            /* Светлые градиенты с мягким разбелением */
+            /* Светлые градиенты и подложки */
             --hero-gradient: linear-gradient(135deg, rgba(244, 244, 249, 0.62) 0%, rgba(244, 244, 249, 0.78) 100%);
-            --expert-gradient: linear-gradient(to right, #F4F4F9 35%, rgba(244, 244, 249, 0.2) 70%, transparent 100%);
             --complex-gradient: linear-gradient(to right, #F4F4F9 50%, rgba(244, 244, 249, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, rgba(244, 244, 249, 0.9) 100%);
-            --text-card-bg: rgba(244, 244, 249, 0.95);
+            --text-card-bg: rgba(255, 255, 255, 0.4);
         }
 
         [data-theme="dark"] {
@@ -56,12 +55,11 @@
             --nav-bg: rgba(6, 9, 19, 0.95);
             --noise-opacity: 0.05;
             
-            /* Темные градиенты с благородным затемнением */
+            /* Темные градиенты и подложки */
             --hero-gradient: linear-gradient(135deg, rgba(6, 9, 19, 0.67) 0%, rgba(6, 9, 19, 0.82) 100%);
-            --expert-gradient: linear-gradient(to right, #060913 40%, rgba(6, 9, 19, 0.7) 70%, rgba(6, 9, 19, 0.3) 100%);
             --complex-gradient: linear-gradient(to right, #060913 45%, rgba(6, 9, 19, 0.6) 75%, rgba(6, 9, 19, 0.3) 100%);
             --back-gradient: linear-gradient(to bottom, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.95) 100%);
-            --text-card-bg: rgba(6, 9, 19, 0.95);
+            --text-card-bg: rgba(255, 255, 255, 0.01);
         }
 
         /* --- GLOBAL RESET --- */
@@ -194,20 +192,36 @@
         .bento-card { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; position: relative; overflow: hidden; }
         
         .w-2 { grid-column: span 2; }
-        
-        .bento-card h3 { font-size: 28px; line-height: 1.2; font-weight: 600; z-index: 2; }
-        .bento-card p { font-size: 15px; opacity: 0.8; font-weight: 300; line-height: 1.6; z-index: 2; }
-        .card-price { font-size: 32px; font-family: var(--font-serif); color: var(--accent-emerald); font-weight: 600; margin-top: auto; z-index: 2; }
-        
-        .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* --- ДЕСКТОПНЫЕ ФОТО БЛОКИ (ПОЛНЫЙ ИДЕАЛ) --- */
+        /* --- ДЕСКТОПНЫЙ БЛОК ЭКСПЕРТОВ (ИСПРАВЛЕНО: РАЗДЕЛЕНИЕ НА 2 СЛОЯ, ТЕКСТ СБОКУ) --- */
         .expert-main-box {
             grid-column: span 2;
-            background-image: var(--expert-gradient), url('ercperty.jpg');
-            background-size: cover; background-position: right center;
+            display: flex !important;
+            flex-direction: row !important;
+            padding: 0 !important; 
+            background: var(--text-card-bg) !important;
+            justify-content: flex-start !important;
         }
-        /* Внутренний контейнер мобильного фото (скрыт на десктопе) */
+        /* Левая текстовая часть на ПК */
+        .expert-main-box .content-wrap {
+            flex: 1.1 !important;
+            padding: 40px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            gap: 16px !important; /* Четкий фиксированный зазор без дыр */
+            z-index: 2;
+        }
+        /* Правая графическая часть на ПК — лица полностью открыты */
+        .desktop-expert-img-part {
+            flex: 0.9 !important;
+            background-image: url('ercperty.jpg');
+            background-size: cover;
+            background-position: center center;
+            min-height: 100%;
+            display: block;
+        }
+        /* Контейнер мобильного фото (скрыт на десктопе) */
         .mobile-expert-img {
             display: none;
             width: 100%;
@@ -216,6 +230,7 @@
             background-image: url('ercperty-mobile.jpg');
         }
 
+        /* Остальные фото-блоки Bento */
         .shvz-box {
             background-image: var(--back-gradient), url('sheyno-vorotnikovaya.jpg');
             background-size: cover; background-position: center center;
@@ -227,7 +242,7 @@
             background-size: cover; background-position: right center;
         }
 
-        /* ИСПРАВЛЕНО: Полностью восстановлен путь к файлу массажа спины */
+        /* ЖЕСТКАЯ ФИКСАЦИЯ: Картинка массажа спины на месте */
         .back-massage-box {
             background-image: var(--back-gradient), url('massazh-spiny.jpg');
             background-size: cover; background-position: center center;
@@ -265,7 +280,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- ИСПРАВЛЕНО: МОБИЛЬНАЯ АДАПТИВНОСТЬ БЕЗ ПОВРЕЖДЕНИЯ ДЕСКТОПА --- */
+        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: ФОТО СВЕРХУ, ТЕКСТ СНИЗУ) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -285,30 +300,24 @@
                 background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.65) 0%, rgba(244, 244, 249, 0.85) 100%), url('hero-mobile.jpg') !important;
             }
 
-            /* ИСПРАВЛЕНО: Полное отделение фото от текста. Лица Сергея и Любови видны на 100% */
+            /* ИСПРАВЛЕНО: Перестраиваем блок вертикально. Сверху чистая картинка, снизу чистый текст */
             .expert-main-box {
-                background-image: none !important;
-                padding: 0 !important; 
-                display: flex !important;
                 flex-direction: column !important;
-                justify-content: flex-start !important;
             }
-            
-            /* Включаем блок с мобильным фото строго НАД текстом */
+            .desktop-expert-img-part {
+                display: none !important; /* Скрываем десктопную половинку */
+            }
+            /* Включаем вертикальный блок с фото над текстом */
             .mobile-expert-img {
                 display: block !important;
-                /* Сдвиг на 35% опускает вертикальный кадр ровно на 2/3, лица встают по центру */
-                background-position: center 35% !important;
+                background-position: center 35% !important; /* Сдвиг 2/3 вниз для идеального кадра */
             }
-            
-            /* ИСПРАВЛЕНО: Сброшен space-between, убран пустой отступ (дыра в верстке) */
+            /* Убираем пустой зазор, текст ложится плотно и аккуратно */
             .expert-main-box .content-wrap {
                 padding: 32px 24px !important;
-                background: var(--text-card-bg);
-                display: flex !important;
-                flex-direction: column !important;
+                flex: none !important;
                 justify-content: flex-start !important;
-                gap: 12px !important; /* Умеренный, аккуратный зазор между строками */
+                gap: 12px !important;
             }
 
             /* Мобильные наложения для остальных Bento блоков */
@@ -378,6 +387,8 @@
                 <h3>15 лет медицинского стажа у ведущих мастеров</h3>
                 <p>Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем глубоко и вдумчиво.</p>
             </div>
+            
+            <div class="desktop-expert-img-part"></div>
         </div>
 
         <div class="glass bento-card back-massage-box">
