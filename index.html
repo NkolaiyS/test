@@ -35,6 +35,12 @@
             --font-serif: 'Cormorant Garamond', serif;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --noise-opacity: 0.02;
+            
+            /* Градиенты для светлой темы (Разбеление) */
+            --hero-gradient: linear-gradient(135deg, rgba(244, 244, 249, 0.82) 0%, rgba(244, 244, 249, 0.93) 100%);
+            --expert-gradient: linear-gradient(to right, #F4F4F9 45%, rgba(244, 244, 249, 0.3) 100%);
+            --complex-gradient: linear-gradient(to right, #F4F4F9 50%, rgba(244, 244, 249, 0.3) 100%);
+            --back-gradient: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, rgba(244, 244, 249, 0.9) 100%);
         }
 
         [data-theme="dark"] {
@@ -48,6 +54,12 @@
             --elem-border: rgba(255, 255, 255, 0.15);
             --nav-bg: rgba(6, 9, 19, 0.95);
             --noise-opacity: 0.05;
+            
+            /* Градиенты для темной темы (Затемнение) */
+            --hero-gradient: linear-gradient(135deg, rgba(6, 9, 19, 0.78) 0%, rgba(6, 9, 19, 0.92) 100%);
+            --expert-gradient: linear-gradient(to right, #060913 40%, rgba(6, 9, 19, 0.7) 70%, rgba(6, 9, 19, 0.3) 100%);
+            --complex-gradient: linear-gradient(to right, #060913 45%, rgba(6, 9, 19, 0.6) 75%, rgba(6, 9, 19, 0.3) 100%);
+            --back-gradient: linear-gradient(to bottom, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.95) 100%);
         }
 
         /* --- GLOBAL RESET --- */
@@ -161,22 +173,19 @@
         .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
         .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
 
-        /* --- HERO SECTION (ИСПРАВЛЕНО: Сделал на 5% светлее наложение для десктопа) --- */
+        /* --- HERO SECTION (ИСПРАВЛЕНО: Привязка к CSS-переменным для точной регулировки яркости) --- */
         .hero { 
             min-height: 90vh; display: flex; align-items: center; justify-content: center; 
             padding: 140px 5% 60px; text-align: center; position: relative;
-            background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.67) 0%, rgba(6, 9, 19, 0.82) 100%), url('hero-foto-massagh.jpg');
+            background-image: var(--hero-gradient), url('hero-foto-massagh.jpg');
             background-size: cover; background-position: center center;
-        }
-        [data-theme="light"] .hero {
-            background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.72) 0%, rgba(244, 244, 249, 0.83) 100%), url('hero-foto-massagh.jpg');
         }
 
         .hero-content { max-width: 850px; position: relative; z-index: 2; }
         .hero-label { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 25px; display: block; font-weight: 700; }
-        .hero-title { font-size: clamp(34px, 5.5vw, 64px); line-height: 1.15; margin-bottom: 25px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .hero-title { font-size: clamp(34px, 5.5vw, 64px); line-height: 1.15; margin-bottom: 25px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
         .hero-title strong { font-weight: 700; color: var(--text-main); }
-        .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; text-shadow: 0 1px 5px rgba(0,0,0,0.3); }
+        .hero-p { font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; }
         
         .hero .btn {
             background: var(--elem-bg);
@@ -205,39 +214,27 @@
         
         .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* --- НАСТРОЙКА ДЕСКТОПНЫХ БЛОКОВ С ФОТО --- */
+        /* --- НАСТРОЙКА ДЕСКТОПНЫХ БЛОКОВ С ФОТО (ИСПРАВЛЕНО: Текст не заезжает на лица) --- */
         .expert-main-box {
             grid-column: span 2;
-            background-image: linear-gradient(to right, var(--bg-deep) 35%, rgba(6, 9, 19, 0.4) 100%), url('ercperty.jpg');
+            background-image: var(--expert-gradient), url('ercperty.jpg');
             background-size: cover; background-position: right center;
-        }
-        [data-theme="light"] .expert-main-box {
-            background-image: linear-gradient(to right, var(--bg-deep) 40%, rgba(255, 255, 255, 0.1) 100%), url('ercperty.jpg');
         }
 
         .shvz-box {
-            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.4) 0%, rgba(6, 9, 19, 0.95) 100%), url('sheyno-vorotnikovaya.jpg');
+            background-image: var(--back-gradient), url('sheyno-vorotnikovaya.jpg');
             background-size: cover; background-position: center center;
-        }
-        [data-theme="light"] .shvz-box {
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%), url('sheyno-vorotnikovaya.jpg');
         }
 
         .complex-box {
             grid-column: span 2;
-            background-image: linear-gradient(to right, var(--bg-deep) 45%, rgba(6, 9, 19, 0.5) 100%), url('massazh-litsa.jpg');
+            background-image: var(--complex-gradient), url('massazh-litsa.jpg');
             background-size: cover; background-position: right center;
-        }
-        [data-theme="light"] .complex-box {
-            background-image: linear-gradient(to right, var(--bg-deep) 50%, rgba(244, 244, 249, 0.2) 100%), url('massazh-litsa.jpg');
         }
 
         .back-massage-box {
-            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.4) 0%, rgba(6, 9, 19, 0.8) 100%), url('massazh-spiny.jpg');
+            background-image: var(--back-gradient), url('massazh-spiny.jpg');
             background-size: cover; background-position: center center;
-        }
-        [data-theme="light"] .back-massage-box {
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.7) 100%), url('massazh-spiny.jpg');
         }
 
         /* Квиз-компонент */
@@ -272,7 +269,7 @@
         .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
         .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- ИСПРАВЛЕНО: ГЛУБОКАЯ АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (УБРАНЫ СРЕЗЫ) --- */
+        /* --- АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (ИСПРАВЛЕНО: Двухстороннее виньетирование для экспертов) --- */
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .w-2, .complex-box, .expert-main-box { grid-column: span 2; }
@@ -282,28 +279,40 @@
             .bento-grid { grid-template-columns: 1fr; }
             .w-2, .complex-box, .expert-main-box { grid-column: span 1; }
             
-            /* Подгружаем мобильное вертикальное фото для Hero со светлым градиентом */
+            /* Мобильный Hero: сбалансированное адаптивное наложение */
             .hero { 
-                background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.45) 0%, rgba(6, 9, 19, 0.65) 100%), url('hero-mobile.jpg');
+                background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.55) 0%, rgba(6, 9, 19, 0.75) 100%), url('hero-mobile.jpg') !important;
                 background-position: center center !important;
                 min-height: 80vh;
             }
             [data-theme="light"] .hero {
-                background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.55) 0%, rgba(244, 244, 249, 0.75) 100%), url('hero-mobile.jpg');
+                background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.65) 0%, rgba(244, 244, 249, 0.85) 100%), url('hero-mobile.jpg') !important;
             }
 
-            /* Подгружаем мобильное фото для Экспертов + убираем перекрытие половинной плашкой */
+            /* ИСПРАВЛЕНО: Мягкое боковое виньетирование для мобильных мастеров, лица полностью открыты */
             .expert-main-box {
-                background-image: linear-gradient(to right, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.1) 50%, rgba(6, 9, 19, 0.5) 100%), url('ercperty-mobile.jpg');
+                background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.7) 0%, rgba(6, 9, 19, 0.1) 40%, rgba(6, 9, 19, 0.1) 70%, rgba(6, 9, 19, 0.8) 100%),
+                                  linear-gradient(to right, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0) 30%, rgba(6, 9, 19, 0) 70%, rgba(6, 9, 19, 0.5) 100%), 
+                                  url('ercperty-mobile.jpg') !important;
                 background-position: center center !important;
-                min-height: 380px; /* Принудительная глубина, чтобы мастера были крупными */
+                min-height: 420px; 
             }
             [data-theme="light"] .expert-main-box {
-                background-image: linear-gradient(to right, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.4) 100%), url('ercperty-mobile.jpg');
+                background-image: linear-gradient(to bottom, rgba(244, 244, 249, 0.6) 0%, rgba(244, 244, 249, 0) 40%, rgba(244, 244, 249, 0) 70%, rgba(244, 244, 249, 0.7) 100%),
+                                  linear-gradient(to right, rgba(254,254,254,0.4) 0%, rgba(254,254,254,0) 30%, rgba(254,254,254,0) 70%, rgba(254,254,254,0.4) 100%), 
+                                  url('ercperty-mobile.jpg') !important;
             }
 
-            /* Настройка остальных картинок, чтобы центрировались идеально */
-            .shvz-box, .complex-box, .back-massage-box { 
+            /* Мобильное наложение для карточки лица, чтобы сдвинуть фокус */
+            .complex-box {
+                background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.6) 0%, rgba(6, 9, 19, 0.9) 100%), url('massazh-litsa.jpg') !important;
+                background-position: center center !important;
+            }
+            [data-theme="light"] .complex-box {
+                background-image: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, rgba(244, 244, 249, 0.95) 100%), url('massazh-litsa.jpg') !important;
+            }
+
+            .shvz-box, .back-massage-box { 
                 background-position: center center !important; 
             }
             
@@ -357,7 +366,7 @@
 <section class="bento-section" id="services">
     <div class="bento-grid">
         
-        <!-- Блок 1 (ФОТО): Экспертность мастеров (Обложка ercperty.jpg / ercperty-mobile.jpg на смартфонах) -->
+        <!-- Блок 1 (ФОТО): Экспертность мастеров (ercperty.jpg / ercperty-mobile.jpg) -->
         <div class="glass bento-card expert-main-box">
             <span class="badge">Команда</span>
             <h3 style="text-shadow: 0 2px 8px rgba(0,0,0,0.5);">15 лет медицинского стажа у ведущих мастеров</h3>
@@ -383,7 +392,7 @@
         <!-- Блок 4 (ИНТЕРАКТИВ): Универсальный подбор -->
         <div class="glass bento-card w-2 ai-box" id="ai-booking">
             <span class="badge">Интерактив</span>
-            <h3>Что вас сейчас беспокоит?</h3>
+            <h3>What vas seychas bespokoit?</h3>
             <p>Выберите ваш главный симптом, и система мгновенно переведет вас на диалог с мастером для записи на нужную процедуру.</p>
             
             <div class="quiz-options">
