@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <script>
+        // Защита от мигания: ставим темную тему по умолчанию
+        const savedTheme = localStorage.getItem('massage_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Massage77 | Профессиональный массаж в Сыктывкаре</title>
+    <meta name="description" content="Массаж в Сыктывкаре на Коммунистической 77/2. Избавьтесь от болей в спине и зажимов у мастеров с 15-летним медицинским стажем. Запись 24/7 с помощью ИИ.">
+    <meta name="keywords" content="массаж сыктывкар, массаж спины сыктывкар, детский массаж, лимфодренажный массаж, массаж коммунистическая, массаж 77 сыктывкар">
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS ПЕРЕМЕННЫЕ (GLASS + СВЕТ/ТЕНЬ) --- */
+        :root {
+            --bg-deep: #F4F4F9; 
+            --glass-bg: rgba(255, 255, 255, 0.85); 
+            --glass-border: 1px solid rgba(0, 0, 0, 0.08); 
+            --accent-emerald: #059669; /* Фирменный изумрудный цвет массажа */
+            --text-main: #05050A; 
+            --text-dim: rgba(8, 8, 20, 0.7);
+            --elem-bg: rgba(0, 0, 0, 0.04);
+            --elem-border: rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(244, 244, 249, 0.95);
+            --font-main: 'Manrope', sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --noise-opacity: 0.02;
+        }
+
+        [data-theme="dark"] {
+            --bg-deep: #060913; 
+            --glass-bg: rgba(255, 255, 255, 0.02); 
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08); 
+            --accent-emerald: #10b981; 
+            --text-main: #F4F4F9;
+            --text-dim: rgba(244, 244, 249, 0.6);
+            --elem-bg: rgba(255, 255, 255, 0.05);
+            --elem-border: rgba(255, 255, 255, 0.15);
+            --nav-bg: rgba(6, 9, 19, 0.95);
+            --noise-opacity: 0.05;
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; overflow-x: hidden !important; width: 100%; position: relative; }
+        body { 
+            background: var(--bg-deep); 
+            color: var(--text-main);
+            font-family: var(--font-main); 
+            line-height: 1.6;
+            /* ТАКТИЛЬНЫЙ ФОН С ШУМОМ */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            background-size: auto;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: ""; position: fixed; inset: 0; z-index: -1;
+            background: var(--bg-deep); opacity: calc(1 - var(--noise-opacity));
+            transition: background-color 0.5s ease;
+        }
+
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; letter-spacing: 1px; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* --- UI COMPONENTS --- */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: var(--glass-border);
+            border-radius: 24px;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* КНОПКИ НЕ ПИЛЮЛИ (Слегка скругленные по ТЗ) */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 36px;
+            border: 1px solid var(--accent-emerald);
+            color: var(--accent-emerald);
+            text-transform: uppercase; font-size: 11px; letter-spacing: 3px;
+            background: transparent; cursor: pointer; transition: var(--transition);
+            font-weight: 600; border-radius: 12px;
+        }
+        .btn:hover {
+            background: var(--accent-emerald);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+        .btn-lens {
+            background: var(--elem-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--elem-border);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* --- GLASS HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 2000; transition: var(--transition); background: transparent; 
+        }
+        header.scrolled { 
+            background: var(--glass-bg) !important; 
+            backdrop-filter: blur(20px) !important; 
+            -webkit-backdrop-filter: blur(20px) !important; 
+            padding: 14px 5% !important; 
+            border-bottom: var(--glass-border);
+        }
+
+        .header-left, .header-right { display: flex; align-items: center; width: 33%; }
+        .header-right { justify-content: flex-end; gap: 15px; }
+        .header-center { width: 34%; display: flex; justify-content: center; }
+
+        .brand-name { 
+            font-family: var(--font-serif); font-size: 22px; 
+            letter-spacing: 8px; text-transform: uppercase; color: var(--text-main); 
+            font-weight: 600;
+        }
+
+        /* БУРГЕР ИЗ 4 ЛИНИЙ */
+        .nav-trigger { position: relative; display: flex; align-items: center; justify-content: center; z-index: 2100; width: 44px; height: 44px; cursor: pointer;}
+        .nav-trigger span { position: absolute; left: 10px; height: 1.5px; background: var(--text-main); transition: var(--transition); width: 24px; border-radius: 2px; }
+        .nav-trigger span:nth-child(1) { top: 12px; }
+        .nav-trigger span:nth-child(2) { top: 18px; }
+        .nav-trigger span:nth-child(3) { top: 24px; }
+        .nav-trigger span:nth-child(4) { top: 30px; }
+
+        .nav-trigger.active span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+        .nav-trigger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .nav-trigger.active span:nth-child(3) { opacity: 0; transform: translateX(10px); }
+        .nav-trigger.active span:nth-child(4) { top: 21px; transform: rotate(-45deg); }
+
+        /* КНОПКА ТЕМЫ (СВЕТ/ТЕНЬ) */
+        #themeToggle {
+            padding: 0 15px; height: 40px; font-size: 11px; font-weight: 600; letter-spacing: 2px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-main); text-transform: uppercase; transition: var(--transition);
+        }
+
+        /* --- ШТОРКА МЕНЮ --- */
+        .glass-sidebar {
+            position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+            background: var(--nav-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            z-index: 1900; display: flex; align-items: center; justify-content: center;
+            transition: left 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        .glass-sidebar.active { left: 0; }
+        .nav-links a { display: block; font-family: var(--font-serif); font-size: 32px; margin: 20px 0; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.5s ease;}
+        .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
+        .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
+
+        /* --- HERO SECTION --- */
+        .hero { min-height: 75vh; display: flex; align-items: center; justify-content: center; padding: 140px 5% 60px; text-align: center; }
+        .hero-content { max-width: 850px; }
+        .hero-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 20px; display: block; font-weight: 700; }
+        .hero-title { font-size: clamp(32px, 5vw, 60px); line-height: 1.1; margin-bottom: 25px; font-weight: 400; }
+        .hero-title strong { font-weight: 600; }
+        .hero-p { font-size: clamp(16px, 2vw, 20px); opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+        /* --- БЕНТО СЕТКА (BENTO GRID) --- */
+        .bento-section { padding: 40px 5% 100px; max-width: 1200px; margin: 0 auto; }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .bento-card { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; position: relative; }
+        
+        /* Модификаторы сетки */
+        .w-2 { grid-column: span 2; }
+        .h-2 { grid-row: span 2; }
+        
+        .bento-card h3 { font-size: 28px; line-height: 1.2; font-weight: 600; }
+        .bento-card p { font-size: 15px; opacity: 0.7; font-weight: 300; line-height: 1.6; }
+        .card-price { font-size: 32px; font-family: var(--font-serif); color: var(--accent-emerald); font-weight: 600; margin-top: auto; }
+        
+        .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; }
+        .accent-gradient { background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%); border: 1px solid rgba(16, 185, 129, 0.2); }
+
+        /* ИИ Интерактив в Bento */
+        .ai-box { background: linear-gradient(145deg, rgba(6, 9, 19, 0.3), transparent); display: flex; flex-direction: column; }
+        .ai-chat-view { background: rgba(0,0,0,0.15); border-radius: 14px; padding: 15px; margin: 10px 0; border: var(--glass-border); }
+        .ai-bubble { background: var(--accent-emerald); color: #fff; padding: 8px 14px; border-radius: 12px 12px 12px 0; font-size: 13px; max-width: 90%; margin-bottom: 10px; }
+        .ai-mock-input { width: 100%; padding: 12px; background: var(--bg-deep); border: var(--glass-border); color: var(--text-main); border-radius: 8px; font-size: 14px; }
+
+        /* --- FOOTER С РЕКВИЗИТАМИ --- */
+        footer { padding: 80px 5% 40px; border-top: var(--glass-border); background: var(--elem-bg); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: left; }
+        .footer-col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-emerald); margin-bottom: 20px; font-weight: 700; }
+        .footer-col p, .footer-col a { font-size: 13px; opacity: 0.7; line-height: 1.8; }
+        .footer-bottom { max-width: 1200px; margin: 60px auto 0; text-align: center; border-top: var(--glass-border); padding-top: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* --- АДАПТИВНОСТЬ МЕНЕЕ 1024px --- */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .w-2 { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .w-2 { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            header { padding: 15px 5% !important; }
+            .brand-name { font-size: 18px; letter-spacing: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="navOverlay" class="glass-sidebar">
+    <div class="nav-links">
+        <a href="#about" onclick="toggleNav()">О студии</a>
+        <a href="#services" onclick="toggleNav()">Виды массажа</a>
+        <a href="#ai-booking" onclick="toggleNav()">ИИ-Запись</a>
+        <a href="#footer" onclick="toggleNav()">Контакты</a>
+    </div>
+</div>
+    
+<header id="header">
+    <div class="header-left">
+        <div class="nav-trigger btn-lens" id="navTrigger" onclick="toggleNav()">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <div class="header-center">
+        <div class="brand-name">Massage77</div>
+    </div>
+
+    <div class="header-right">
+        <button id="themeToggle" class="btn-lens" onclick="toggleTheme()">ТЕНЬ</button>
+    </div>
+</header>
+
+<section class="hero" id="about">
+    <div class="hero-content">
+        <span class="hero-label">Сыктывкар • Коммунистическая 77/2</span>
+        <h1 class="hero-title">Профессиональный массаж от мастеров с <strong>медицинским образованием</strong></h1>
+        <p class="hero-p">Избавляем от болей в спине, зажимов и хронической усталости. Соседям из студии растяжки «РЕСУРС» — особые условия при первом визите!</p>
+        <a href="#ai-booking" class="btn">Записаться на сеанс</a>
+    </div>
+</section>
+
+<section class="bento-section" id="services">
+    <div class="bento-grid">
+        
+        <div class="glass bento-card w-2 accent-gradient">
+            <span class="badge">Экспертность</span>
+            <h3>15 лет медицинского стажа у ведущих мастеров</h3>
+            <p>Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем глубоко и целенаправленно с триггерными точками.</p>
+        </div>
+
+        <div class="glass bento-card">
+            <span class="badge">Топ продаж</span>
+            <h3>Массаж спины</h3>
+            <p>Глубокая проработка мышц от крестца до основания черепа. Снимает спазмы после сидячей работы.</p>
+            <div class="card-price">1 000 ₽</div>
+        </div>
+
+        <div class="glass bento-card">
+            <h3>Шейно-воротниковая зона</h3>
+            <p>Устраняет головные боли, зажимы трапеции и возвращает ясность мыслям за один сеанс.</p>
+            <div class="card-price">900 ₽</div>
+        </div>
+
+        <div class="glass bento-card w-2 ai-box" id="ls-ai-booking">
+            <span class="badge" style="background: rgba(16, 185, 129, 0.15);">Умный ассистент</span>
+            <h3>Подбор практики с ИИ</h3>
+            <p>Нет времени изучать прайс? Напишите нашему ИИ-помощнику, что именно у вас болит, и он подберет идеальную технику за 30 секунд.</p>
+            
+            <div class="ai-chat-view">
+                <div class="ai-bubble">Здравствуйте! Что вас сейчас больше всего беспокоит? (Например: тянет поясницу, затекла шея...)</div>
+                <input type="text" class="ai-mock-input" placeholder="Введите ваш симптом..." id="aiMockInput">
+            </div>
+            <button class="btn" style="width: 100%;" onclick="alert('Николай, сюда мы привяжем твой боевой бэкенд ИИ!');">Запустить подбор техники</button>
+        </div>
+
+        <div class="glass bento-card">
+            <h3>Комплексный массаж</h3>
+            <p>Тотальная перезагрузка всего тела от макушки до стоп. Лимфодренаж и снятие стресса.</p>
+            <div class="card-price">2 300 ₽</div>
+        </div>
+
+        <div class="glass bento-card">
+            <span class="badge">Отзывы 5.0</span>
+            <p style="font-style: italic;">«Чувствую легкость во всем теле, перестала болеть спина, шея, прошли затяжные головные боли и головокружения. Буду рекомендовать вас близким!»</p>
+            <h4 style="font-family: var(--font-serif); font-size: 18px; margin-top: auto;">— Лидия Шестопалова</h4>
+        </div>
+
+        <div class="glass bento-card">
+            <h3>Лимфодренажный массаж</h3>
+            <p>Выводит лишнюю жидкость, эффективно борется с отеками и ускоряет метаболизм.</p>
+            <div class="card-price">1 800 ₽</div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>Локация</h4>
+            <p>📍 г. Сыктывкар, ул. Коммунистическая, д. 77/2</p>
+            <p>Кабинет находится в одном здании со студией «РЕСУРС»</p>
+        </div>
+        <div class="footer-col">
+            <h4>Контакты</h4>
+            <p>📞 Тел: <a href="tel:+79042330773">+7 (904) 233-07-73</a></p>
+            <p>📱 Группа ВК: <a href="https://vk.com/clubmassage77" target="_blank">vk.com/clubmassage77</a></p>
+        </div>
+        <div class="footer-col">
+            <h4>Реквизиты</h4>
+            <p>ИП Мартюшев Сергей Олегович</p>
+            <p>ИНН: 110112345678</p>
+            <p>ОГРНИП: 321110100012345</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Студия «Massage77». Разработка монолитного кода: Николай (Студия РЕСУРС).
+    </div>
+</footer>
+
+<script>
+    // --- УПРАВЛЕНИЕ ТЕМОЙ (СВЕТ / ТЕНЬ) ---
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('massage_theme', newTheme);
+        
+        document.getElementById('themeToggle').innerText = newTheme === 'dark' ? 'СВЕТ' : 'ТЕНЬ';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        document.getElementById('themeToggle').innerText = theme === 'dark' ? 'СВЕТ' : 'ТЕНЬ';
+    });
+
+    // --- Скролл шапки ---
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 40) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+    });
+
+    // --- Бургер-меню ---
+    function toggleNav() {
+        const overlay = document.getElementById('navOverlay');
+        const trigger = document.getElementById('navTrigger');
+        trigger.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : 'auto';
+    }
+
+    // Обработка Enter в интерактивном поле ИИ
+    document.getElementById('aiMockInput').onkeypress = (e) => { 
+        if(e.key === 'Enter' && e.target.value.trim() !== '') {
+            alert('Отличный запрос! ИИ-модуль Николая готов проанализировать симптом: "' + e.target.value + '"');
+            e.target.value = '';
+        } 
+    };
+</script>
+
+</body>
+</html>
