@@ -161,43 +161,42 @@
         .glass-sidebar.active .nav-links a { opacity: 0.9; transform: translateY(0); transition-delay: 0.2s; }
         .nav-links a:hover { color: var(--accent-emerald); letter-spacing: 2px; opacity: 1; }
 
-        /* --- HERO SECTION (ИСПРАВЛЕНО: Полная яркость без наложений + тени для текста) --- */
+        /* --- HERO SECTION (ИСПРАВЛЕНО: Глубокое затемнение ТОЛЬКО Hero) --- */
         .hero { 
             min-height: 90vh; display: flex; align-items: center; justify-content: center; 
             padding: 140px 5% 60px; text-align: center; position: relative;
-            background-image: url('hero-foto-massagh.jpg');
+            background-image: linear-gradient(135deg, rgba(6, 9, 19, 0.75) 0%, rgba(6, 9, 19, 0.9) 100%), url('hero-foto-massagh.jpg');
             background-size: cover; background-position: center;
         }
+        [data-theme="light"] .hero {
+            background-image: linear-gradient(135deg, rgba(244, 244, 249, 0.8) 0%, rgba(244, 244, 249, 0.95) 100%), url('hero-foto-massagh.jpg');
+        }
+
         .hero-content { 
             max-width: 850px; position: relative; z-index: 2; 
         }
         .hero-label { 
             font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 25px; display: block; font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
         .hero-title { 
             font-size: clamp(34px, 5.5vw, 64px); line-height: 1.15; margin-bottom: 25px; font-weight: 400; 
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.5);
-            color: #FFFFFF; /* Фиксируем контрастный белый на первом экране */
         }
-        .hero-title strong { font-weight: 700; color: #FFFFFF; }
+        .hero-title strong { font-weight: 700; color: var(--text-main); }
         .hero-p { 
-            font-size: clamp(16px, 2.2vw, 22px); max-width: 700px; margin: 0 auto 45px; font-weight: 400; 
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-            color: #F4F4F9;
+            font-size: clamp(16px, 2.2vw, 22px); opacity: 0.9; max-width: 700px; margin: 0 auto 45px; font-weight: 300; 
         }
         .hero .btn {
-            background: rgba(6, 9, 19, 0.4);
+            background: var(--elem-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-color: var(--accent-emerald);
-            color: #FFFFFF;
-            font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            color: var(--text-main);
+            font-weight: 600;
         }
         .hero .btn:hover {
             background: var(--accent-emerald);
             box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
+            color: #fff;
         }
 
         /* --- БЕНТО СЕТКА (BENTO GRID) --- */
@@ -214,14 +213,14 @@
         
         .badge { background: var(--elem-bg); border: 1px solid var(--elem-border); padding: 6px 14px; border-radius: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: fit-content; z-index: 2; }
 
-        /* Карточки с фоновыми изображениями */
+        /* Карточки с фоновыми изображениями (ИСПРАВЛЕНО: затемнил комплексный для контраста) */
         .complex-box {
             grid-column: span 2;
-            background-image: linear-gradient(to right, var(--bg-deep) 45%, rgba(6, 9, 19, 0.2) 100%), url('massazh-litsa.jpg');
+            background-image: linear-gradient(to right, var(--bg-deep) 45%, rgba(6, 9, 19, 0.5) 100%), url('massazh-litsa.jpg');
             background-size: cover; background-position: right center;
         }
         [data-theme="light"] .complex-box {
-            background-image: linear-gradient(to right, var(--bg-deep) 50%, rgba(254, 254, 254, 0.1) 100%), url('massazh-litsa.jpg');
+            background-image: linear-gradient(to right, var(--bg-deep) 50%, rgba(244, 244, 249, 0.2) 100%), url('massazh-litsa.jpg');
         }
 
         .expert-box {
@@ -229,15 +228,15 @@
             background-size: cover; background-position: center;
         }
         [data-theme="light"] .expert-box {
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, var(--bg-deep) 90%), url('sheyno-vorotnikovaya.jpg');
+            background-image: linear-gradient(to bottom, rgba(244, 244, 249, 0.5) 0%, var(--bg-deep) 90%), url('sheyno-vorotnikovaya.jpg');
         }
 
         .back-massage-box {
-            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.5) 0%, rgba(6, 9, 19, 0.8) 100%), url('massazh-spiny.jpg');
+            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.7) 0%, rgba(6, 9, 19, 0.95) 100%), url('massazh-spiny.jpg');
             background-size: cover; background-position: center;
         }
         [data-theme="light"] .back-massage-box {
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.9) 100%), url('massazh-spiny.jpg');
+            background-image: linear-gradient(to bottom, rgba(244, 244, 249, 0.6) 0%, rgba(244, 244, 249, 0.95) 100%), url('massazh-spiny.jpg');
         }
 
         /* ИИ Интерактив в Bento */
@@ -245,6 +244,20 @@
         .ai-chat-view { background: rgba(0,0,0,0.15); border-radius: 14px; padding: 15px; margin: 10px 0; border: var(--glass-border); }
         .ai-bubble { background: var(--accent-emerald); color: #fff; padding: 8px 14px; border-radius: 12px 12px 12px 0; font-size: 13px; max-width: 90%; margin-bottom: 10px; }
         .ai-mock-input { width: 100%; padding: 12px; background: var(--bg-deep); border: var(--glass-border); color: var(--text-main); border-radius: 8px; font-size: 14px; }
+
+        /* ИСПРАВЛЕНО: Золотые SVG-звезды в блоке отзывов */
+        .stars-row { display: flex; gap: 4px; margin-bottom: 15px; z-index: 2; }
+        .stars-row svg { width: 18px; height: 18px; fill: #FBBF24; /* Теплый золотой */ }
+
+        /* ИСПРАВЛЕНО: Тонкая стрелка внизу карточки отзывов */
+        .arrow-link {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding-top: 20px; margin-top: auto;
+            border-top: 1px solid var(--elem-border); z-index: 2; opacity: 0.5;
+            color: var(--accent-emerald); transition: var(--transition);
+        }
+        .bento-card:hover .arrow-link { opacity: 1; transform: translateY(-3px); }
+        .arrow-link svg { width: 22px; height: 22px; stroke-width: 1.5; }
 
         /* --- FOOTER С РЕКВИЗИТАМИ --- */
         footer { padding: 80px 5% 40px; border-top: var(--glass-border); background: var(--elem-bg); }
@@ -301,7 +314,7 @@
         <h1 class="hero-title">Профессиональный массаж от мастеров с <strong>медицинским образованием</strong></h1>
         <p class="hero-p">Избавляем от болей в спине, зажимов и хронической усталости. Мягкая и глубокая терапия вашего тела.</p>
         
-        <a href="vk://im?sel=-229223236" class="btn" id="vkDirectBtn">Записаться на практику</a>
+        <a href="https://vk.com/im?sel=-229223236" class="btn" target="_blank">Записаться на практику</a>
     </div>
 </section>
 
@@ -310,22 +323,22 @@
         
         <div class="glass bento-card w-2 expert-box">
             <span class="badge">Экспертность</span>
-            <h3 style="text-shadow: 0 2px 8px rgba(0,0,0,0.4);">15 лет медицинского стажа у мастеров</h3>
-            <p style="text-shadow: 0 1px 4px rgba(0,0,0,0.4); max-width: 600px;">Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем вдумчиво.</p>
+            <h3>15 лет медицинского стажа у мастеров</h3>
+            <p>Сергей Олегович и Любовь Носкова — дипломированные специалисты. Спасают от затяжных болей в пояснице, шее, онемения конечностей и скачков давления. Никаких шаблонных поглаживаний — работаем вдумчиво.</p>
         </div>
 
         <div class="glass bento-card back-massage-box">
             <span class="badge">Хит продаж</span>
-            <h3 style="text-shadow: 0 2px 6px rgba(0,0,0,0.4);">Массаж спины</h3>
-            <p style="text-shadow: 0 1px 3px rgba(0,0,0,0.4);">Глубокая проработка мышц от крестца до основания черепа. Снимает спазмы после сидячей работы.</p>
-            <div class="card-price" style="text-shadow: 0 1px 4px rgba(0,0,0,0.4);">1 000 ₽</div>
+            <h3>Массаж спины</h3>
+            <p>Глубокая проработка мышц от крестца до основания черепа. Снимает спазмы после сидячей работы.</p>
+            <div class="card-price">1 000 ₽</div>
         </div>
 
         <div class="glass bento-card complex-box">
             <span class="badge">Косметология и релакс</span>
-            <h3 style="max-width: 500px; text-shadow: 0 2px 6px rgba(0,0,0,0.3);">Комплексный массаж лица</h3>
-            <p style="max-width: 450px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">Включает обязательную проработку шейно-воротниковой зоны для снятия статического напряжения мышц. Улучшает микроциркуляцию тканей, разгоняет лимфоток и избавляет от отеков. Кожа становится упругой, подтянутой, уходят синие круги под глазами, а нервная система получает полную «перезагрузку».</p>
-            <div class="card-price" style="text-shadow: 0 1px 4px rgba(0,0,0,0.3);">2 300 ₽</div>
+            <h3 style="max-width: 500px;">Комплексный массаж лица</h3>
+            <p style="max-width: 450px;">Включает обязательную проработку шейно-воротниковой зоны для снятия статического напряжения мышц. Улучшает микроциркуляцию тканей, разгоняет лимфоток и избавляет от отеков. Кожа становится упругой, подтянутой, уходят синие круги под глазами, а нервная система получает полную «перезагрузку».</p>
+            <div class="card-price">2 300 ₽</div>
         </div>
 
         <div class="glass bento-card">
@@ -343,13 +356,23 @@
                 <div class="ai-bubble">Здравствуйте! Что вас сейчас больше всего беспокоит? (Например: тянет поясницу, затекла шея...)</div>
                 <input type="text" class="ai-mock-input" placeholder="Введите ваш симптом..." id="aiMockInput">
             </div>
-            <button class="btn" style="width: 100%;" onclick="window.location.href='vk://im?sel=-229223236';">Запустить подбор техники</button>
+            <button class="btn" style="width: 100%;" onclick="window.location.href='https://vk.com/im?sel=-229223236';">Запустить подбор техники</button>
         </div>
 
         <div class="glass bento-card">
-            <span class="badge">Отзывы 5.0</span>
+            <div class="stars-row">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
             <p style="font-style: italic;">«Чувствую легкость во всем теле, перестала болеть спина, шея, прошли затяжные головные боли и головокружения. Доверяю только Сергею Олеговичу!»</p>
-            <h4 style="font-family: var(--font-serif); font-size: 18px; margin-top: auto;">— Лидия Шестопалова</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 18px; margin-top: 20px;">— Лидия Шестопалова</h4>
+            
+            <a href="https://vk.com/reviews-229223236" target="_blank" class="arrow-link" aria-label="Смотреть все отзывы">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
         </div>
 
         <div class="glass bento-card">
@@ -385,23 +408,6 @@
 </footer>
 
 <script>
-    // --- ИСПРАВЛЕНО: Умный редирект для кнопки ВК (Приложение / Браузер) ---
-    document.getElementById('vkDirectBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        const appUrl = "vk://im?sel=-229223236";
-        const webUrl = "https://vk.com/im/convo/-229223236?entrypoint=community_page&tab=all";
-        
-        const startTime = Date.now();
-        window.location.href = appUrl;
-
-        // Если через полсекунды приложение не открылось (например, на десктопе), перенаправляем в браузер
-        setTimeout(function() {
-            if (Date.now() - startTime < 600) {
-                window.open(webUrl, '_blank');
-            }
-        }, 500);
-    });
-
     // --- УПРАВЛЕНИЕ ТЕМОЙ (СВЕТ / ТЕНЬ) ---
     function toggleTheme() {
         const html = document.documentElement;
